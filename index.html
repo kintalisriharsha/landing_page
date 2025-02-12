@@ -440,4 +440,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Check and set tracking consent
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to initialize tracking
+    function initializeTracking() {
+        // Initialize Facebook Pixel tracking
+        if (typeof fbq !== 'undefined') {
+            fbq('consent', 'grant'); // Grant consent to Facebook Pixel
+            fbq('track', 'PageView'); // Track page view
+        }
+
+        // Track form interactions
+        const form = document.getElementById('applicationForm');
+        if (form) {
+            // Track form field interactions
+            form.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('focus', function() {
+                    fbq('trackCustom', 'FormFieldFocus', {
+                        field_name: element.name
+                    });
+                });
+            });
+
+            // Track form submissions
+            form.addEventListener('submit', function(e) {
+                if (validateForm()) {
+                    fbq('track', 'Lead', {
+                        content_name: 'MBBS Application',
+                        status: 'submitted'
+                    });
+                }
+            });
+        }
+
+        // Track button clicks
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                fbq('trackCustom', 'ButtonClick', {
+                    button_text: button.textContent.trim()
+                });
+            });
+        });
+
+        // Track scroll depth
+        let scrollDepthTracked = new Set();
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+            
+            [25, 50, 75, 100].forEach(depth => {
+                if (scrollPercent >= depth && !scrollDepthTracked.has(depth)) {
+                    scrollDepthTracked.add(depth);
+                    fbq('trackCustom', 'ScrollDepth', {
+                        depth: depth + '%'
+                    });
+                }
+            });
+        });
+    }
+
+    // Initialize tracking immediately
+    initializeTracking();
+});
 </script>
