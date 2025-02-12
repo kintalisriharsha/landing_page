@@ -15,14 +15,8 @@ cd mbbs-abroad-landing
 ```
 mbbs-abroad-landing/
 ├── index.html
-├── assets/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── main.js
-│   └── images/
+├── index.css
 ├── README.md
-└── report.md
 ```
 
 3. **Dependencies**
