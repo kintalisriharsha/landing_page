@@ -132,3 +132,7 @@ npx http-server
 
 ## Conclusion
 The MBBS Abroad Landing Page successfully meets all the specified requirements with a focus on user experience, performance, and conversion optimization. The implementation follows modern web development practices and ensures scalability for future enhancements.
+
+
+## ui/ux design
+https://www.figma.com/design/C2BVJdfBxStVwJbLXwMxCI/Abroad-Mbbs?m=auto&t=vmqT6CwUJQCbJvcw-6
